@@ -1,0 +1,27 @@
+GET http://localhost:3000/users
+
+###
+POST http://localhost:3000/register
+Content-Type: application/json
+
+{
+            "job_id": "1", 
+            "email":"user1@gmail.com", 
+            "password":"user123", 
+            "name":"aku user 1", 
+            "phone":"087856551803",
+            "gender":"perempuan"
+}
+
+###
+POST http://localhost:3000/register
+Content-Type: application/json
+
+{
+            "job_id": "1", 
+            "email":"user2@gmail.com", 
+            "password":"user456", 
+            "name":"aku user 2", 
+            "phone":"087856551804",
+            "gender":"laki-laki"
+}
