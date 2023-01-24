@@ -1,6 +1,8 @@
 import express from "express";
+import dotenv from "dotenv";
 import db from "./config/db.js";
 import router from "./routes/auth.js";
+dotenv.config();
 // import users from "./models/userModel.js";
 const app = express()
 
