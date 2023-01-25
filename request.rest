@@ -6,11 +6,21 @@ Content-Type: application/json
 
 {
             "first_name" : "aku",
-            "last_name": "user1",
-            "job_id " : "1",
-            "email" : "user1@gmail.com",
-            "password":  "user123",
-            "re_password": "user12",
+            "last_name": "user4",
+            "jobid" : "1",
+            "email" : "user4@gmail.com",
+            "password":  "user1234",
+            "re_password": "user1234",
             "phone":"089799887766",
-            "gender":"laki-laki"
+            "gender":"laki-laki",
+            "secret_number":"987152"
+}
+
+###
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "email":"user3@gmail.com",
+    "password":"user1234"
 }

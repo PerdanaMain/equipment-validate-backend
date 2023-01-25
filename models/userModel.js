@@ -11,7 +11,7 @@ const users = db.define('users', {
         type: DataTypes.STRING
     },
     job_id:{
-        type: DataTypes.STRING
+        type: DataTypes.INTEGER
     },
     email:{
         type: DataTypes.STRING

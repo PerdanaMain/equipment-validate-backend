@@ -12,15 +12,17 @@ export const getUsers =  async(req, res) => {
 }
 
 export const Register = async(req,res) => {
-    const { first_name, last_name, job_id, email, password, re_password, phone, gender} = req.body;
+    const { first_name, last_name, jobid, email, password, re_password, phone, gender, secret_number} = req.body;
+    const secretNumber = process.env.secret;
     if(password !== re_password) return res.status(400).json({msg:"password and re-type password do not match"});
+    if(secretNumber !== secret_number ) return res.status(403).json({msg:"you are not allowed to regist here!"})
     const salt = await bcrypt.genSalt();
     const hashPassword = await bcrypt.hash(password, salt);
     try {
         await Users.create({
             first_name:first_name,
             last_name:last_name,
-            job_id:job_id, 
+            job_id:jobid, 
             email:email, 
             password:hashPassword,
             phone:phone,
@@ -32,16 +34,36 @@ export const Register = async(req,res) => {
     }
 }
 
-export const login = async(req, res) => {
+export const Login = async(req, res) => {
     try {
-        const user = await Users.findAll({
+         const user = await Users.findAll({
             where:{
-                email:req.body.email
+                email: req.body.email
             }
-        });
-        const match = await bcrypt.compare(req.body.password, user[0].password);
-        if(match) return res.status(400).json({msg:"Wrong Password"})
-    } catch (error) {
+         });
+         const match = await bcrypt.compare(req.body.password, user[0].password);
+         if(!match) return res.status(400).json({msg: "Wrong Password"});
+         const userId = user[0].id;
+         const first_name = user[0].first_name;
+         const email = user[0].email;
+         const accessToken = jwt.sign({userId, first_name, email}, process.env.ACCESS_TOKEN_SECRET,{
+            expiresIn: '20s'
+         });
+         const refreshToken = jwt.sign({userId, first_name, email}, process.env.REFRESH_TOKEN_SECRET,{
+            expiresIn: '1d'
+         });
+         await Users.update({refresh_token : refreshToken}, {
+            where:{
+                id: userId
+            }
+         });
+         res.cookie('refreshToken', refreshToken, {
+            httpOnly: true,
+            maxAge: 24 * 60 * 60 * 1000
+            // , secure:true
+         });
+         res.json({ accessToken });
+     } catch (error) {
         res.status(404).json({msg:"Email Not Found"})
     }
 }
