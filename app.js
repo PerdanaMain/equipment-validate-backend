@@ -1,30 +1,25 @@
 import express from "express";
 import dotenv from "dotenv";
-import db from "./config/db.js";
-import router from "./routes/auth.js";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import bodyParser from "body-parser";
+import router from "./routes/index.js";
+
+//config
 dotenv.config();
-// import users from "./models/userModel.js";
-const app = express()
 
+//initiate
+const app = express();
 
-try {
-    await db.authenticate();
-    console.log('Database Connected...');
-    // await users.sync();
-} catch (error) {
-    console.error(error);
-}
-
+app.use(cors());
+app.use(cookieParser());
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(router);
 
-const PORT = 3000
-
+const { PORT = 8000 } = process.env;
 
 app.listen(PORT, () => {
-    console.log("running on port", PORT)
-})
-
-
-
-
+  console.log(`Listening on Port ${PORT}`);
+});
