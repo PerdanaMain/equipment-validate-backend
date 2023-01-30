@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import db from "../models/index.js"
+import db from "../models/index.js";
 const Users = db.user;
 
 export const handleGetRoot = async (req, res) => {
