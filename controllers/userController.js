@@ -1,4 +1,4 @@
-import bcrypt, { hash } from "bcrypt";
+import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 import db from "../models/index.js";
@@ -43,15 +43,15 @@ export const Register = async (req, res) => {
   const salt = await bcrypt.genSalt();
   const hashPassword = await bcrypt.hash(password, salt);
   try {
-   await Users.create({
-    first_name,
-    last_name,
-    email,
-    password: hashPassword,
-    phone,
-    gender,
-    job_id
-   })
+    await Users.create({
+      first_name,
+      last_name,
+      email,
+      password: hashPassword,
+      phone,
+      gender,
+      job_id,
+    });
     res.json({ msg: "Register Successfully" });
   } catch (error) {
     console.log(error.message);
