@@ -1,6 +1,6 @@
 import express from "express";
 import { handleGetRoot } from "../controllers/userController.js";
-import { getUsers, Register, Login, Logout } from "../controllers/users.js";
+import { getUsers, Register, Login, Logout } from "../controllers/userController.js";
 import { verifyToken } from "../middleware/verifyToken.js";
 import { refreshToken } from "../controllers/refreshToken.js";
 

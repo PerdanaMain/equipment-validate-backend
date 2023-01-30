@@ -45,38 +45,38 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 // Relation tables intiate
-db.user = require("../models/users.js")(sequelize, Sequelize);
-db.job = require("../models/job.js")(sequelize, Sequelize);
-db.equipment = require("../models/equipment.js")(sequelize, Sequelize);
+// db.user = require("../models/users.js")(sequelize, Sequelize);
+// db.job = require("../models/jobs.js")(sequelize, Sequelize);
+// db.equipment = require("../models/equipments.js")(sequelize, Sequelize);
 
-// relation for users API
-db.job.hasMany(db.user, {
-  as: "users",
-  foreignKey: "id",
-});
-db.user.belongsTo(db.job, {
-  as: "jobs",
-  foreignKey: "job_id",
-});
+// // relation for users API
+// db.job.hasMany(db.user, {
+//   as: "users",
+//   foreignKey: "id",
+// });
+// db.user.belongsTo(db.job, {
+//   as: "jobs",
+//   foreignKey: "job_id",
+// });
 
-db.user.hasMany(db.action, {
-  foreignKey: "user_id",
-  as: "actions",
-  sourceKey: "id",
-});
-db.action.belongsTo(db.equipment, {
-  foreignKey: "equipment_id",
-  as: "equipments",
-  sourceKey: "id",
-});
+// db.user.hasMany(db.action, {
+//   foreignKey: "user_id",
+//   as: "actions",
+//   sourceKey: "id",
+// });
+// db.action.belongsTo(db.equipment, {
+//   foreignKey: "equipment_id",
+//   as: "equipments",
+//   sourceKey: "id",
+// });
 // db.booking.hasMany(db.passangerbooking, {
 //   foreignKey: "idBooking",
 //   as: "passangerBooking",
 //   sourceKey: "id",
 // });
 
-db.equipment.belongsTo(db.user, {
-  as: "users",
-  foreignKey: "user_id",
-});
+// db.equipment.belongsTo(db.user, {
+//   as: "users",
+//   foreignKey: "user_id",
+// });
 module.exports = db;
