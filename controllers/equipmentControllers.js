@@ -1,7 +1,5 @@
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import db from "../models/index.js";
 
-import db from "../models/index.js"
 
 const equipment = db.equipment;
 const user = db.user;
@@ -72,3 +70,18 @@ export const deleteData = async (req, res) => {
       res.status(400).json({message: error.message});
   }
 }
+// set db
+
+
+export const getAllRouters = async (req, res) => {
+  try {
+    const routers = await Equipments.findAll({ where: req.body.router });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+export const getAllServers = async (req, res) => {};
+export const getAllSwitches = async (req, res) => {};
+export const getAllStorages = async (req, res) => {};
+export const getAllOTB = async (req, res) => {};
+export const getAllGGSN = async (req, res) => {};

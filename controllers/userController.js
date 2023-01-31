@@ -34,6 +34,17 @@ export const Register = async (req, res) => {
     secret_number
   } = req.body;
   const secretNumber = process.env.secret;
+  const user = await Users.findAll({
+    where: {
+      email,
+    },
+  });
+  if (user != "")
+    return res.status(400).json({
+      code: 400,
+      status: false,
+      msg: "your email has been created before",
+    });
   if (password !== re_password)
     return res
       .status(400)
@@ -122,5 +133,9 @@ export const Logout = async (req, res) => {
     }
   );
   res.clearCookie("refreshToken");
-  return res.sendStatus(200);
+  return res.status(200).json({
+    code: 200,
+    status: true,
+    msg: "Logout Successfully",
+  });
 };
