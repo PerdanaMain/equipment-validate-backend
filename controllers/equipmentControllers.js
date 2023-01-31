@@ -10,7 +10,7 @@ export const getData = async (req, res) => {
     try {
       const data = await equipment.findAll({include:{model:action, as:"equipmentAction",include:{model:user,as:"userAction"}}});
       json(data);
-    } catch (error) {
+    } catch (error) { 
       console.log(error);
     }
 };
