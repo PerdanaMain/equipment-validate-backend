@@ -44,7 +44,6 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-
 //Relation tables intiate
 db.user = require("../models/users.js")(sequelize, Sequelize);
 db.job = require("../models/jobs.js")(sequelize, Sequelize);

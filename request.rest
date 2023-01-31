@@ -5,15 +5,15 @@ POST http://localhost:8000/register
 Content-Type: application/json
 
 {
-            "first_name" : "aku",
-            "last_name": "user4",
-            "job_id" : "1",
-            "email" : "user4@gmail.com",
-            "password":  "user1234",
-            "re_password": "user1234",
-            "phone":"089799887766",
-            "gender":"laki-laki",
-            "secret_number":"987152"
+    "first_name" : "aku",
+    "last_name": "user4",
+    "job_id" : "1",
+    "email" : "user4@gmail.com",
+    "password":  "user1234",
+    "re_password": "user1234",
+    "phone":"089799887766",
+    "gender":"laki-laki",
+    "secret_number":"987152"
 }
 
 ###
