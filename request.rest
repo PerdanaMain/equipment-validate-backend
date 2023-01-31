@@ -21,17 +21,38 @@ POST http://localhost:8000/login
 Content-Type: application/json
 
 {
-    "email":"user3@gmail.com",
+    "email":"user4@gmail.com",
     "password":"user1234"
 }
 
 ###
-GET http://localhost:3000/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImZpcnN0X25hbWUiOiJha3UiLCJlbWFpbCI6InVzZXIzQGdtYWlsLmNvbSIsImlhdCI6MTY3NDcwODM1MCwiZXhwIjoxNjc0NzA4MzY1fQ.pDCbpK5nLuvFNBTOR-nkz8JXU9fNZwS9XAp12ZCnJhs
-
+GET http://localhost:8000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImZpcnN0X25hbWUiOiJha3UiLCJlbWFpbCI6InVzZXI0QGdtYWlsLmNvbSIsImlhdCI6MTY3NTEyMDU5OCwiZXhwIjoxNjc1MTIwNjEzfQ.RFVN6X-OE2D-P-Riv9NEJ24bTgLjlgaZBrjHGDANJD8
 
 ###
-GET http://localhost:3000/token
+GET http://localhost:8000/token
 
 ### 
 DELETE  http://localhost:3000/logout
+
+###
+GET http://localhost:8000/data
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImZpcnN0X25hbWUiOiJha3UiLCJlbWFpbCI6InVzZXI0QGdtYWlsLmNvbSIsImlhdCI6MTY3NTEyMDY1MywiZXhwIjoxNjc1MTIwNjY4fQ.Ei4dQnjx049epoXQtDewzEC2Jdt2n9wNShVBB3POGYE
+
+###
+POST http://localhost:8000/data
+{
+   "location":"surabaya",
+            "floor":"3",
+            "rack":"A.15.07",
+            "hostname":"SBRK03JSBKJS",
+            "capacity":"100g",
+            "brand":"huawei",
+            "type":"catalys",
+            "serial_number":"dhviuubnod",
+            "functions":"server",
+            "category":"server",
+            "group":"IT",
+            "status":"on",
+            "created_by":"1"
+}

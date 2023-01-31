@@ -31,7 +31,7 @@ export const Register = async (req, res) => {
     re_password,
     phone,
     gender,
-    secret_number,
+    secret_number
   } = req.body;
   const secretNumber = process.env.secret;
   if (password !== re_password)
