@@ -22,6 +22,9 @@ router.post(prefix + "/login", Login);
 router.get(prefix + "/token", refreshToken);
 router.delete(prefix + "/logout", Logout);
 
+// ROUTES FOR EQUIPMENT
+router.get(prefix + "/data", getData);
+
 // Routes for sorting
 router.get(prefix + "/sort", verifyToken, sortEquipments);
 

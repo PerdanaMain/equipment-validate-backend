@@ -3,12 +3,13 @@ import db from "../models/index.js";
 
 const equipment = db.equipment;
 const user = db.user;
+const action = db.action
 
 
 export const getData = async (req, res) => {
     try {
-      const data = await equipment.findAll();
-      res.status(201).json(data);
+      const data = await equipment.findAll({include:{model:action, as:"equipmentAction",include:{model:user,as:"userAction"}}});
+      json(data);
     } catch (error) {
       console.log(error);
     }

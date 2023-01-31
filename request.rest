@@ -17,12 +17,12 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:8000/login
+POST http://localhost:8000/v1/api/login
 Content-Type: application/json
 
 {
-    "email":"user4@gmail.com",
-    "password":"user1234"
+    "email":"firman.fp123@gmail.com",
+    "password":"123456"
 }
 
 ###
@@ -30,14 +30,14 @@ GET http://localhost:8000/users
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImZpcnN0X25hbWUiOiJha3UiLCJlbWFpbCI6InVzZXI0QGdtYWlsLmNvbSIsImlhdCI6MTY3NTEyMDU5OCwiZXhwIjoxNjc1MTIwNjEzfQ.RFVN6X-OE2D-P-Riv9NEJ24bTgLjlgaZBrjHGDANJD8
 
 ###
-GET http://localhost:8000/token
+GET http://localhost:8000/v1/api/token
 
 ### 
 DELETE  http://localhost:3000/logout
 
 ###
-GET http://localhost:8000/data
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImZpcnN0X25hbWUiOiJha3UiLCJlbWFpbCI6InVzZXI0QGdtYWlsLmNvbSIsImlhdCI6MTY3NTEyMDY1MywiZXhwIjoxNjc1MTIwNjY4fQ.Ei4dQnjx049epoXQtDewzEC2Jdt2n9wNShVBB3POGYE
+GET http://localhost:8000/v1/api/data
+
 
 ###
 POST http://localhost:8000/data
