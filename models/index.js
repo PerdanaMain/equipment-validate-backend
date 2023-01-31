@@ -59,23 +59,22 @@ db.user.belongsTo(db.job, {
   as: "jobs",
   foreignKey: "job_id",
 });
-db.user.hasMany(db.action, {
-  as: "userAction",
-  foreignKey: "id",
-});
-
-db.action.belongsTo(db.user, {
-  as: "userAction",
-  foreignKey: "user_id",
-});
-db.action.hasMany(db.equipment, {
-  foreignKey: "user_id",
+db.user.hasMany(db.equipment, {
+  foreignKey: "updated_by",
   as: "equipments",
-  sourceKey: "user_id",
 });
 
-db.equipment.belongsTo(db.action, {
-  as: "equipmentAction",
-  foreignKey: "equipment_id",
+db.equipment.belongsTo(db.user, {
+  foreignKey: "id",
+  as: "users",
 });
+// db.action.hasMany(db.equipment, {
+//   foreignKey: "user_id",
+//   as: "equipments",
+// });
+
+// db.equipment.belongsTo(db.action, {
+//   as: "equipmentAction",
+//   foreignKey: "equipment_id",
+// });
 module.exports = db;
