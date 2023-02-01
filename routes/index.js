@@ -16,7 +16,7 @@ const prefix = "/v1/api";
 
 // ROUTES FOR USERS
 router.get(prefix, handleGetRoot);
-router.get(prefix + "/users", verifyToken, getUsers);
+router.get(prefix + "/users", getUsers);
 router.post(prefix + "/register", Register);
 router.post(prefix + "/login", Login);
 router.get(prefix + "/token", refreshToken);

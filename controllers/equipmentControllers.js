@@ -10,7 +10,14 @@ export const getData = async (req, res) => {
       include: {
         model: user,
         as: "users",
-        attributes: ["first_name", "last_name", "phone", "gender", "email"],
+        attributes: [
+          "id",
+          "first_name",
+          "last_name",
+          "phone",
+          "gender",
+          "email",
+        ],
       },
     });
     res.status(200).json({ code: 200, status: true, msg: data });

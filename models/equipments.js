@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   equipments.init({
+    user_id: DataTypes.INTEGER,
     location: DataTypes.STRING,
     floor: DataTypes.INTEGER,
     rack: DataTypes.STRING,
@@ -26,8 +27,8 @@ module.exports = (sequelize, DataTypes) => {
     category: DataTypes.STRING,
     group: DataTypes.STRING,
     status: DataTypes.STRING,
-    updated_by: DataTypes.INTEGER,
-    created_by: DataTypes.INTEGER
+    updated_by: DataTypes.STRING,
+    created_by: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'equipments',

@@ -9,6 +9,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      user_id: {
+        type: Sequelize.INTEGER
+      },
       location: {
         type: Sequelize.STRING
       },
@@ -46,10 +49,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       updated_by: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       created_by: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

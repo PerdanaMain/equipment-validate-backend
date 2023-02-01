@@ -26,8 +26,8 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:8000/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImZpcnN0X25hbWUiOiJha3UiLCJlbWFpbCI6InVzZXI0QGdtYWlsLmNvbSIsImlhdCI6MTY3NTEyMDU5OCwiZXhwIjoxNjc1MTIwNjEzfQ.RFVN6X-OE2D-P-Riv9NEJ24bTgLjlgaZBrjHGDANJD8
+GET http://localhost:8000/v1/api/users
+
 
 ###
 GET http://localhost:8000/v1/api/token
