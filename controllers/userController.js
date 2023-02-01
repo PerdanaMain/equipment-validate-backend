@@ -31,7 +31,7 @@ export const Register = async (req, res) => {
     re_password,
     phone,
     gender,
-    secret_number
+    secret_number,
   } = req.body;
   const secretNumber = process.env.secret;
   const user = await Users.findAll({
@@ -43,14 +43,14 @@ export const Register = async (req, res) => {
     return res.status(400).json({
       code: 400,
       status: false,
-      msg: "your email has been created before",
+      msg: "Your email has been created before",
     });
   if (password !== re_password)
     return res
       .status(400)
-      .json({ msg: "password and re-type password do not match" });
+      .json({ msg: "Password and re-type password do not match" });
   if (secretNumber !== secret_number)
-    return res.status(403).json({ msg: "you are not allowed to regist here!" });
+    return res.status(403).json({ msg: "Please Get The Right Access Number" });
   const salt = await bcrypt.genSalt();
   const hashPassword = await bcrypt.hash(password, salt);
   try {
