@@ -7,7 +7,7 @@ module.exports = {
       "users",
       [
         {
-          job_id: 3,
+          job_id: 2,
           first_name: "Firman",
           last_name: "Perdana",
           phone: "0812588912",
@@ -18,7 +18,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          job_id: 3,
+          job_id: 2,
           first_name: "Cyntia Prisya",
           last_name: "Andhyni",
           phone: "0812588912",
@@ -29,7 +29,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          job_id: 3,
+          job_id: 2,
           first_name: "Dimas Mirza",
           last_name: "Alifansa",
           phone: "0812588912",

@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 
 import db from "../models/index.js";
 const Users = db.user;
+const Job = db.job;
 
 export const handleGetRoot = async (req, res) => {
   res.status(200).json({
@@ -14,7 +15,7 @@ export const handleGetRoot = async (req, res) => {
 
 export const getUsers = async (req, res) => {
   try {
-    const users = await Users.findAll();
+    const users = await Users.findAll({ include: { model: Job, as: "jobs" } });
     res.json(users);
   } catch (error) {
     console.log(error);

@@ -48,7 +48,7 @@ db.Sequelize = Sequelize;
 db.user = require("../models/users.js")(sequelize, Sequelize);
 db.job = require("../models/jobs.js")(sequelize, Sequelize);
 db.equipment = require("../models/equipments.js")(sequelize, Sequelize);
-db.action = require("../models/actions.js")(sequelize, Sequelize);
+// db.action = require("../models/actions.js")(sequelize, Sequelize);
 
 // relation for users API
 db.job.hasMany(db.user, {
@@ -60,13 +60,13 @@ db.user.belongsTo(db.job, {
   foreignKey: "job_id",
 });
 db.user.hasMany(db.equipment, {
-  foreignKey: "updated_by",
   as: "equipments",
+  foreignKey: "id",
 });
 
 db.equipment.belongsTo(db.user, {
-  foreignKey: "id",
   as: "users",
+  foreignKey: "user_id",
 });
 // db.action.hasMany(db.equipment, {
 //   foreignKey: "user_id",
