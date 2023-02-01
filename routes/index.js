@@ -24,6 +24,7 @@ router.delete(prefix + "/logout", Logout);
 
 // ROUTES FOR EQUIPMENT
 router.get(prefix + "/data", getData);
+router.post(prefix + "/data", createData);
 
 // Routes for sorting
 router.get(prefix + "/sort", verifyToken, sortEquipments);

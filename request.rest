@@ -37,13 +37,15 @@ DELETE  http://localhost:3000/logout
 
 ###
 GET http://localhost:8000/v1/api/data
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImZpcnN0X25hbWUiOiJGaXJtYW4iLCJlbWFpbCI6ImZpcm1hbi5mcDEyM0BnbWFpbC5jb20iLCJpYXQiOjE2NzUyMDcxNzksImV4cCI6MTY3NTIwNzE5OX0.xayBupYMT90uJedYa6Gt0_Zt9NcxTu08pU1o7skpxkA
 
 
 ###
-POST http://localhost:8000/data
+POST http://localhost:8000/v1/api/data
+
 {
-   "location":"surabaya",
-            "floor":"3",
+            "location":"surabaya",
+            "floor":3,
             "rack":"A.15.07",
             "hostname":"SBRK03JSBKJS",
             "capacity":"100g",
@@ -54,5 +56,5 @@ POST http://localhost:8000/data
             "category":"server",
             "group":"IT",
             "status":"on",
-            "created_by":"1"
+            "created_by":"CP"
 }

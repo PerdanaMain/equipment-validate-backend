@@ -1,6 +1,5 @@
 import db from "../models/index.js";
 
-const equipment = db.equipment;
 const user = db.user;
 const Equipment = db.equipment;
 
@@ -19,8 +18,10 @@ export const getData = async (req, res) => {
   }
 };
 
+
 export const createData = async (req, res) => {
   const {
+    user_id,
     location,
     floor,
     rack,
@@ -33,25 +34,23 @@ export const createData = async (req, res) => {
     category,
     group,
     status,
-    updated_by,
     created_by,
   } = req.body;
   try {
-    await equipment.create({
-      location,
-      floor,
-      rack,
-      hostname,
-      capacity,
-      brand,
-      type,
-      serial_number,
-      function: functions,
-      category,
-      group,
-      status,
-      updated_by,
-      created_by,
+    await Equipment.create({
+    location,
+    floor,
+    rack,
+    hostname,
+    capacity,
+    brand,
+    type,
+    serial_number,
+    function:functions,
+    category,
+    group,
+    status,
+    created_by,
     });
     res.json({ msg: "Create Successfully" });
   } catch (error) {
