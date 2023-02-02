@@ -30,9 +30,6 @@ export const getDataById = async (req, res) => {
   try {
     const data = await Equipment.findOne(
       {
-       where:{id}
-      }
-      ,{
       include: {
         model: user,
         as: "users",
@@ -45,7 +42,9 @@ export const getDataById = async (req, res) => {
           "email",
         ],
       },
-    }
+    }, {
+      where:{id}
+     }
     );
     res.status(200).json({ code: 200, status: true, msg: data });
   } catch (error) {
@@ -142,9 +141,9 @@ export const updateData = async (req, res) => {
 export const deleteData = async (req, res) => {
   const {id} = req.body;
   try {
-    const deleteData = await Equipment.deleteOne({
-      where:{_id :id} });
-    res.status(200).json(deleteData);
+    await Equipment.destroy({
+      where:{id :id} });
+    res.status(200).json({msg:"Equipment Deleted"});
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
