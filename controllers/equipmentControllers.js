@@ -25,6 +25,33 @@ export const getData = async (req, res) => {
   }
 };
 
+export const getDataById = async (req, res) => {
+  const {id} = req.body;
+  try {
+    const data = await Equipment.findOne(
+      {
+       where:{id}
+      }
+      ,{
+      include: {
+        model: user,
+        as: "users",
+        attributes: [
+          "id",
+          "first_name",
+          "last_name",
+          "phone",
+          "gender",
+          "email",
+        ],
+      },
+    }
+    );
+    res.status(200).json({ code: 200, status: true, msg: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const createData = async (req, res) => {
   const {
@@ -45,6 +72,7 @@ export const createData = async (req, res) => {
   } = req.body;
   try {
     await Equipment.create({
+    user_id,      
     location,
     floor,
     rack,
@@ -67,19 +95,55 @@ export const createData = async (req, res) => {
 
 export const updateData = async (req, res) => {
   try {
-    const updateData = await equipment.updateOne(
-      { _id: req.params.id },
-      { $set: req.body }
-    );
-    res.status(200).json(updateData);
+    const {
+      id,
+      user_id,
+      location,
+      floor,
+      rack,
+      hostname,
+      capacity,
+      brand,
+      type,
+      serial_number,
+      functions,
+      category,
+      group,
+      status,
+      updated_by,
+    } = req.body;
+    await Equipment.update({
+      user_id,
+      location,
+      floor,
+      rack,
+      hostname,
+      capacity,
+      brand,
+      type,
+      serial_number,
+      function:functions,
+      category,
+      group,
+      status,
+      updated_by, 
+    },{
+      where:{
+        id:id
+      }
+    });
+    res.status(200).json({msg:"Equipment Updated"})
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
 
+
 export const deleteData = async (req, res) => {
+  const {id} = req.body;
   try {
-    const deleteData = await equipment.deleteOne({ _id: req.params.id });
+    const deleteData = await Equipment.deleteOne({
+      where:{_id :id} });
     res.status(200).json(deleteData);
   } catch (error) {
     res.status(400).json({ message: error.message });
