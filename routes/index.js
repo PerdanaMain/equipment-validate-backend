@@ -6,8 +6,12 @@ import {
   Login,
   Logout,
 } from "../controllers/userController.js";
-import { sortEquipments } from "../controllers/sortController.js";
-import { verifyToken } from "../middleware/verifyToken.js";
+import {
+  sortEquipments,
+  sortByHost,
+  sortByRack,
+} from "../controllers/sortController.js";
+// import { verifyToken } from "../middleware/verifyToken.js";
 import { refreshToken } from "../controllers/refreshToken.js";
 import { getData, createData } from "../controllers/equipmentControllers.js";
 
@@ -26,6 +30,8 @@ router.delete(prefix + "/logout", Logout);
 router.get(prefix + "/data", getData);
 
 // Routes for sorting
-router.get(prefix + "/sort", verifyToken, sortEquipments);
+router.get(prefix + "/sort", sortEquipments);
+router.get(prefix + "/hostname", sortByHost);
+router.get(prefix + "/rack", sortByRack);
 
 export default router;

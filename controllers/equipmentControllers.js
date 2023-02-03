@@ -20,7 +20,7 @@ export const getData = async (req, res) => {
         ],
       },
     });
-    res.status(200).json({ code: 200, status: true, msg: data });
+    res.status(200).json({ code: 200, status: true, data });
   } catch (error) {
     console.log(error);
   }

@@ -27,6 +27,16 @@ Content-Type: application/json
 
 ###
 GET http://localhost:8000/v1/api/users
+###
+GET http://localhost:8000/v1/api/sort
+{
+    "rack":"A.03.02"
+}
+###
+GET http://localhost:8000/v1/api/sort/hostname
+{
+    "hostname":"OTB"
+}
 
 
 ###
@@ -43,16 +53,16 @@ GET http://localhost:8000/v1/api/data
 POST http://localhost:8000/data
 {
    "location":"surabaya",
-            "floor":"3",
-            "rack":"A.15.07",
-            "hostname":"SBRK03JSBKJS",
-            "capacity":"100g",
-            "brand":"huawei",
-            "type":"catalys",
-            "serial_number":"dhviuubnod",
-            "functions":"server",
-            "category":"server",
-            "group":"IT",
-            "status":"on",
-            "created_by":"1"
+    "floor":"3",
+    "rack":"A.15.07",
+    "hostname":"SBRK03JSBKJS",
+    "capacity":"100g",
+    "brand":"huawei",
+    "type":"catalys",
+    "serial_number":"dhviuubnod",
+    "functions":"server",
+    "category":"server",
+    "group":"IT",
+    "status":"on",
+    "created_by":"1"
 }
