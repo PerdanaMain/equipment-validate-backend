@@ -1,6 +1,5 @@
 import db from "../models/index.js";
 
-const equipment = db.equipment;
 const user = db.user;
 const Equipment = db.equipment;
 
@@ -26,8 +25,36 @@ export const getData = async (req, res) => {
   }
 };
 
+export const getDataById = async (req, res) => {
+  const {id} = req.body;
+  try {
+    const data = await Equipment.findOne(
+      {
+      include: {
+        model: user,
+        as: "users",
+        attributes: [
+          "id",
+          "first_name",
+          "last_name",
+          "phone",
+          "gender",
+          "email",
+        ],
+      },
+    }, {
+      where:{id}
+     }
+    );
+    res.status(200).json({ code: 200, status: true, msg: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const createData = async (req, res) => {
   const {
+    user_id,
     location,
     floor,
     rack,
@@ -40,25 +67,24 @@ export const createData = async (req, res) => {
     category,
     group,
     status,
-    updated_by,
     created_by,
   } = req.body;
   try {
-    await equipment.create({
-      location,
-      floor,
-      rack,
-      hostname,
-      capacity,
-      brand,
-      type,
-      serial_number,
-      function: functions,
-      category,
-      group,
-      status,
-      updated_by,
-      created_by,
+    await Equipment.create({
+    user_id,      
+    location,
+    floor,
+    rack,
+    hostname,
+    capacity,
+    brand,
+    type,
+    serial_number,
+    function:functions,
+    category,
+    group,
+    status,
+    created_by,
     });
     res.json({ msg: "Create Successfully" });
   } catch (error) {
@@ -68,20 +94,56 @@ export const createData = async (req, res) => {
 
 export const updateData = async (req, res) => {
   try {
-    const updateData = await equipment.updateOne(
-      { _id: req.params.id },
-      { $set: req.body }
-    );
-    res.status(200).json(updateData);
+    const {
+      id,
+      user_id,
+      location,
+      floor,
+      rack,
+      hostname,
+      capacity,
+      brand,
+      type,
+      serial_number,
+      functions,
+      category,
+      group,
+      status,
+      updated_by,
+    } = req.body;
+    await Equipment.update({
+      user_id,
+      location,
+      floor,
+      rack,
+      hostname,
+      capacity,
+      brand,
+      type,
+      serial_number,
+      function:functions,
+      category,
+      group,
+      status,
+      updated_by, 
+    },{
+      where:{
+        id:id
+      }
+    });
+    res.status(200).json({msg:"Equipment Updated"})
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
 
+
 export const deleteData = async (req, res) => {
+  const {id} = req.body;
   try {
-    const deleteData = await equipment.deleteOne({ _id: req.params.id });
-    res.status(200).json(deleteData);
+    await Equipment.destroy({
+      where:{id :id} });
+    res.status(200).json({msg:"Equipment Deleted"});
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

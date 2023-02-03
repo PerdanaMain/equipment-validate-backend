@@ -13,7 +13,7 @@ import {
 } from "../controllers/sortController.js";
 // import { verifyToken } from "../middleware/verifyToken.js";
 import { refreshToken } from "../controllers/refreshToken.js";
-import { getData, createData } from "../controllers/equipmentControllers.js";
+import { getData, createData, updateData, deleteData, getDataById } from "../controllers/equipmentControllers.js";
 
 const router = express.Router();
 const prefix = "/v1/api";
@@ -27,7 +27,11 @@ router.get(prefix + "/token", refreshToken);
 router.delete(prefix + "/logout", Logout);
 
 // ROUTES FOR EQUIPMENT
-router.get(prefix + "/data", getData);
+router.get(prefix + "/data", verifyToken, getData);
+router.post(prefix + "/create", verifyToken, createData);
+router.put(prefix + "/update", verifyToken, updateData);
+router.delete(prefix + "/delete", verifyToken, deleteData);
+router.post(prefix + "/dataById", verifyToken, getDataById);
 
 // Routes for sorting
 router.get(prefix + "/sort", sortEquipments);
