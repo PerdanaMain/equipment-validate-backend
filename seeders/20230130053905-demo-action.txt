@@ -39,3 +39,75 @@ module.exports = {
     await queryInterface.bulkDelete("actions", null, {});
   },
 };
+
+
+// sortif (hostname !== null || hostname !== undefined) {
+      try {
+        const getHostname = await Equipments.findAll({
+          where: {
+            hostname: {
+              [Op.like]: `%${hostname}%`,
+            },
+          },
+          include: {
+            model: Users,
+            as: "users",
+            attributes: [
+              "id",
+              "first_name",
+              "last_name",
+              "phone",
+              "gender",
+              "email",
+            ],
+          },
+        });
+        arrayLists.push(getHostname);
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+    if (status !== null || status !== undefined) {
+      try {
+        const getStatus = await Equipments.findAll({
+          where: {
+            status: {
+              [Op.like]: `%${status}%`,
+            },
+          },
+          include: {
+            model: Users,
+            as: "users",
+            attributes: [
+              "id",
+              "first_name",
+              "last_name",
+              "phone",
+              "gender",
+              "email",
+            ],
+          },
+        });
+        arrayLists.push(getStatus);
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+
+    [Op.or]: [
+          {
+            hostname: {
+              [Op.like]: `%${hostname}%`,
+            },
+          },
+          {
+            status: {
+              [Op.like]: `%${status}%`,
+            },
+          },
+          {
+            function: {
+              [Op.like]: `%${func}%`,
+            },
+          },
+        ],

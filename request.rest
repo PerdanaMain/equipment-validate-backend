@@ -29,13 +29,16 @@ Content-Type: application/json
 GET http://localhost:8000/v1/api/users
 ###
 GET http://localhost:8000/v1/api/sort
+
 {
-    "rack":"A.03.02"
+    "hostname":"CAS",
+    "status":"On"
 }
 ###
-GET http://localhost:8000/v1/api/sort/hostname
+GET http://localhost:8000/v1/api/hostname
+
 {
-    "hostname":"OTB"
+ "hostname":"CAS"
 }
 
 
@@ -54,21 +57,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImZpc
 POST http://localhost:8000/v1/api/data
 
 {
-<<<<<<< HEAD
-   "location":"surabaya",
-    "floor":"3",
-    "rack":"A.15.07",
-    "hostname":"SBRK03JSBKJS",
-    "capacity":"100g",
-    "brand":"huawei",
-    "type":"catalys",
-    "serial_number":"dhviuubnod",
-    "functions":"server",
-    "category":"server",
-    "group":"IT",
-    "status":"on",
-    "created_by":"1"
-=======
+   
             "location":"surabaya",
             "floor":3,
             "rack":"A.15.07",
@@ -82,5 +71,4 @@ POST http://localhost:8000/v1/api/data
             "group":"IT",
             "status":"on",
             "created_by":"CP"
->>>>>>> 6507e4ffa7f45efb8bf4cccf06b00a7c7347f49a
 }

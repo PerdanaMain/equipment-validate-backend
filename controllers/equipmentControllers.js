@@ -26,25 +26,26 @@ export const getData = async (req, res) => {
 };
 
 export const getDataById = async (req, res) => {
-  const {id} = req.body;
+  const { id } = req.body;
   try {
     const data = await Equipment.findOne(
       {
-      include: {
-        model: user,
-        as: "users",
-        attributes: [
-          "id",
-          "first_name",
-          "last_name",
-          "phone",
-          "gender",
-          "email",
-        ],
+        include: {
+          model: user,
+          as: "users",
+          attributes: [
+            "id",
+            "first_name",
+            "last_name",
+            "phone",
+            "gender",
+            "email",
+          ],
+        },
       },
-    }, {
-      where:{id}
-     }
+      {
+        where: { id },
+      }
     );
     res.status(200).json({ code: 200, status: true, msg: data });
   } catch (error) {
@@ -71,20 +72,20 @@ export const createData = async (req, res) => {
   } = req.body;
   try {
     await Equipment.create({
-    user_id,      
-    location,
-    floor,
-    rack,
-    hostname,
-    capacity,
-    brand,
-    type,
-    serial_number,
-    function:functions,
-    category,
-    group,
-    status,
-    created_by,
+      user_id,
+      location,
+      floor,
+      rack,
+      hostname,
+      capacity,
+      brand,
+      type,
+      serial_number,
+      function: functions,
+      category,
+      group,
+      status,
+      created_by,
     });
     res.json({ msg: "Create Successfully" });
   } catch (error) {
@@ -111,39 +112,42 @@ export const updateData = async (req, res) => {
       status,
       updated_by,
     } = req.body;
-    await Equipment.update({
-      user_id,
-      location,
-      floor,
-      rack,
-      hostname,
-      capacity,
-      brand,
-      type,
-      serial_number,
-      function:functions,
-      category,
-      group,
-      status,
-      updated_by, 
-    },{
-      where:{
-        id:id
+    await Equipment.update(
+      {
+        user_id,
+        location,
+        floor,
+        rack,
+        hostname,
+        capacity,
+        brand,
+        type,
+        serial_number,
+        function: functions,
+        category,
+        group,
+        status,
+        updated_by,
+      },
+      {
+        where: {
+          id: id,
+        },
       }
-    });
-    res.status(200).json({msg:"Equipment Updated"})
+    );
+    res.status(200).json({ msg: "Equipment Updated" });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
 
-
 export const deleteData = async (req, res) => {
-  const {id} = req.body;
+  const { id } = req.body;
   try {
     await Equipment.destroy({
-      where:{id :id} });
-    res.status(200).json({msg:"Equipment Deleted"});
+      where: { id: id },
+    });
+    res.status(200).json({ msg: "Equipment Deleted" });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
