@@ -48,6 +48,9 @@ module.exports = {
       status: {
         type: Sequelize.STRING
       },
+      remark: {
+        type: Sequelize.STRING
+      },
       updated_by: {
         type: Sequelize.STRING
       },

@@ -1,4 +1,5 @@
 import db from "../models/index.js";
+import { Op } from "sequelize";
 
 const user = db.user;
 const Equipment = db.equipment;
@@ -26,28 +27,24 @@ export const getData = async (req, res) => {
 };
 
 export const getDataById = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
   try {
-    const data = await Equipment.findOne(
-      {
-        include: {
-          model: user,
-          as: "users",
-          attributes: [
-            "id",
-            "first_name",
-            "last_name",
-            "phone",
-            "gender",
-            "email",
-          ],
-        },
+    const data = await Equipment.findOne({
+      where: { id },
+      include: {
+        model: user,
+        as: "users",
+        attributes: [
+          "id",
+          "first_name",
+          "last_name",
+          "phone",
+          "gender",
+          "email",
+        ],
       },
-      {
-        where: { id },
-      }
-    );
-    res.status(200).json({ code: 200, status: true, msg: data });
+    });
+    res.status(200).json({ code: 200, status: true, data });
   } catch (error) {
     console.log(error);
   }
@@ -95,8 +92,8 @@ export const createData = async (req, res) => {
 
 export const updateData = async (req, res) => {
   try {
+    const { id } = req.params;
     const {
-      id,
       user_id,
       location,
       floor,
@@ -131,7 +128,7 @@ export const updateData = async (req, res) => {
       },
       {
         where: {
-          id: id,
+          id,
         },
       }
     );
@@ -142,10 +139,10 @@ export const updateData = async (req, res) => {
 };
 
 export const deleteData = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
   try {
     await Equipment.destroy({
-      where: { id: id },
+      where: { id },
     });
     res.status(200).json({ msg: "Equipment Deleted" });
   } catch (error) {
@@ -154,15 +151,107 @@ export const deleteData = async (req, res) => {
 };
 // set db
 
-export const getAllRouters = async (req, res) => {
+export const getOn = async (req, res) => {
   try {
-    const routers = await Equipments.findAll({ where: req.body.router });
+    const on = await Equipment.findAll({
+      where: {
+        status: {
+          [Op.like]: `%On%`,
+        },
+      },
+      include: {
+        model: user,
+        as: "users",
+        attributes: [
+          "id",
+          "first_name",
+          "last_name",
+          "phone",
+          "gender",
+          "email",
+        ],
+      },
+    });
+    return res.status(200).json({ code: 200, status: true, data: on });
   } catch (error) {
     console.log(error.message);
   }
 };
-export const getAllServers = async (req, res) => {};
-export const getAllSwitches = async (req, res) => {};
-export const getAllStorages = async (req, res) => {};
-export const getAllOTB = async (req, res) => {};
-export const getAllGGSN = async (req, res) => {};
+export const getOff = async (req, res) => {
+  try {
+    const off = await Equipment.findAll({
+      where: {
+        status: {
+          [Op.like]: `%Off%`,
+        },
+      },
+      include: {
+        model: user,
+        as: "users",
+        attributes: [
+          "id",
+          "first_name",
+          "last_name",
+          "phone",
+          "gender",
+          "email",
+        ],
+      },
+    });
+    return res.status(200).json({ code: 200, status: true, data: off });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+export const getNotFound = async (req, res) => {
+  try {
+    const nf = await Equipment.findAll({
+      where: {
+        status: {
+          [Op.like]: `%Not Found%`,
+        },
+      },
+      include: {
+        model: user,
+        as: "users",
+        attributes: [
+          "id",
+          "first_name",
+          "last_name",
+          "phone",
+          "gender",
+          "email",
+        ],
+      },
+    });
+    return res.status(200).json({ code: 200, status: true, data: nf });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+export const getPassive = async (req, res) => {
+  try {
+    const psv = await Equipment.findAll({
+      where: {
+        status: {
+          [Op.like]: `%Passive%`,
+        },
+      },
+      include: {
+        model: user,
+        as: "users",
+        attributes: [
+          "id",
+          "first_name",
+          "last_name",
+          "phone",
+          "gender",
+          "email",
+        ],
+      },
+    });
+    return res.status(200).json({ code: 200, status: true, data: psv });
+  } catch (error) {
+    console.log(error.message);
+  }
+};

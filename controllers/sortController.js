@@ -46,13 +46,11 @@ export const sortEquipments = async (req, res) => {
 };
 
 export const sortByHost = async (req, res) => {
-  const { hostname } = req.body;
+  const { hostname } = req.query;
   try {
-    const get = await Equipments.findAll({
+    const hsn = await Equipments.findAll({
       where: {
-        hostname: {
-          [Op.like]: `%${hostname}%`,
-        },
+        hostname: { [Op.like]: `%${hostname}%` },
       },
       include: {
         model: Users,
@@ -68,13 +66,13 @@ export const sortByHost = async (req, res) => {
       },
     });
 
-    return res.status(200).json({ code: 200, status: true, data: get });
+    return res.status(200).json({ code: 200, status: true, data: hsn });
   } catch (error) {
     console.log(error.message);
   }
 };
 export const sortByRack = async (req, res) => {
-  const { rack } = req.body;
+  const { rack } = req.query;
   try {
     const get = await Equipments.findAll({
       where: {
@@ -98,5 +96,36 @@ export const sortByRack = async (req, res) => {
     return res.status(200).json({ code: 200, status: true, data: get });
   } catch (error) {
     console.log(error.message);
+  }
+};
+
+export const sortByFloor = async (req, res) => {
+  const { floor } = req.query;
+  try {
+    const lt = await Equipments.findAll({
+      where: {
+        floor: {
+          [Op.like]: `%${floor}%`,
+        },
+      },
+    });
+    return res.status(200).json({ code: 200, status: true, data: lt });
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+export const sortByStatus = async (req, res) => {
+  const { status } = req.query;
+  try {
+    const st = await Equipments.findAll({
+      where: {
+        status: {
+          [Op.like]: `%${status}%`,
+        },
+      },
+    });
+    return res.status(200).json({ code: 200, status: true, data: st });
+  } catch (e) {
+    console.log(e.message);
   }
 };

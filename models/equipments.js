@@ -27,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     category: DataTypes.STRING,
     group: DataTypes.STRING,
     status: DataTypes.STRING,
+    remark: DataTypes.STRING,
     updated_by: DataTypes.STRING,
     created_by: DataTypes.STRING
   }, {

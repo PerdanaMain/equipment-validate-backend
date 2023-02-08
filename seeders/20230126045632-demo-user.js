@@ -7,6 +7,17 @@ module.exports = {
       "users",
       [
         {
+          job_id: 3,
+          first_name: "Super",
+          last_name: "Admin",
+          phone: "Admin",
+          gender: "Admin",
+          email: "admin",
+          password: await bcrypt.hash("admin", 10),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
           job_id: 2,
           first_name: "Firman",
           last_name: "Perdana",

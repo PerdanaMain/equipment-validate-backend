@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 
 import db from "../models/index.js";
 const Users = db.user;
-const Job = db.job;
+const jobs = db.job;
 
 export const handleGetRoot = async (req, res) => {
   res.status(200).json({
@@ -15,10 +15,36 @@ export const handleGetRoot = async (req, res) => {
 
 export const getUsers = async (req, res) => {
   try {
-    const users = await Users.findAll({ include: { model: Job, as: "jobs" } });
-    res.json(users);
+    const users = await Users.findAll({
+      attributes: [
+        "job_id",
+        "first_name",
+        "last_name",
+        "phone",
+        "gender",
+        "email",
+      ],
+      include: {
+        model: jobs,
+        as: "jobs",
+        attributes: ["id", "job_name"],
+      },
+    });
+    res.status(200).json({ code: 200, status: true, data: users });
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const deleteUser = async (req, res) => {
+  const { id } = req.params;
+  try {
+    await Equipment.destroy({
+      where: { id },
+    });
+    res.status(200).json({ msg: "User Deleted" });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
   }
 };
 
@@ -76,14 +102,21 @@ export const Login = async (req, res) => {
       where: {
         email: req.body.email,
       },
+      include: {
+        model: jobs,
+        as: "jobs",
+        attributes: ["id", "job_name"],
+      },
     });
     const match = await bcrypt.compare(req.body.password, user[0].password);
     if (!match) return res.status(400).json({ msg: "Wrong Password" });
     const userId = user[0].id;
     const first_name = user[0].first_name;
+    const last_name = user[0].last_name;
     const email = user[0].email;
+    const job_id = user[0].jobs.id;
     const accessToken = jwt.sign(
-      { userId, first_name, email },
+      { userId, first_name, last_name, email, job_id },
       process.env.ACCESS_TOKEN_SECRET,
       {
         expiresIn: "20s",
