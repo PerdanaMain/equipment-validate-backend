@@ -15,11 +15,11 @@
   },
   "production": {
     "username": "root",
-    "password": "hBV8zlROqcJm41TPNm1S",
+    "password": "mAh9rA8tBVwNh0sjba8d",
     "database": "railway",
-    "host": "containers-us-west-121.railway.app",
-    "url": "mysql://root:hBV8zlROqcJm41TPNm1S@containers-us-west-121.railway.app:7000/railway",
+    "host": "containers-us-west-197.railway.app",
+    "url": "mysql://root:mAh9rA8tBVwNh0sjba8d@containers-us-west-197.railway.app:6051/railway",
     "dialect": "mysql",
-    "port": "7000"
+    "port": "6051"
   }
 }
