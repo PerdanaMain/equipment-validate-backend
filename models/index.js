@@ -48,6 +48,8 @@ db.Sequelize = Sequelize;
 db.user = require("../models/users.js")(sequelize, Sequelize);
 db.job = require("../models/jobs.js")(sequelize, Sequelize);
 db.equipment = require("../models/equipments.js")(sequelize, Sequelize);
+db.Barang = require("../models/barang.js")(sequelize, Sequelize);
+
 // db.action = require("../models/actions.js")(sequelize, Sequelize);
 
 // relation for users API
@@ -68,13 +70,5 @@ db.equipment.belongsTo(db.user, {
   as: "users",
   foreignKey: "user_id",
 });
-// db.action.hasMany(db.equipment, {
-//   foreignKey: "user_id",
-//   as: "equipments",
-// });
 
-// db.equipment.belongsTo(db.action, {
-//   as: "equipmentAction",
-//   foreignKey: "equipment_id",
-// });
 module.exports = db;
